@@ -18,8 +18,25 @@ jobs:
           name: Run tests
           command: pytest
 
+  docs-build:
+    executor: python-executor
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: pip install -r requirements.txt
+      - run:
+          name: Build documentation
+          command: |
+            cd docs
+            make html
+      - persist_to_workspace:
+          root: docs/_build
+          paths: html
+
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - test
+      - docs-build
