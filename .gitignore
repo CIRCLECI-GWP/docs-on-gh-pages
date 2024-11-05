@@ -1,0 +1,41 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment directory
+venv/
+
+# Sphinx build files
+docs/_build/
+
+# Test output
+*.coverage
+.cache/
+pytest_cache/
+test-results/
+
+# CircleCI artifacts and logs
+.circleci/artifacts
+.circleci/logs
+
+# Python packages
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Editors and OS files
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+*.log
+*.out
+
+# Node modules (if using Node in CI/CD)
+node_modules/
+
+# GitHub Pages deployment file
+docs/_build/html/.nojekyll
