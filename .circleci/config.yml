@@ -34,9 +34,38 @@ jobs:
           root: docs/_build
           paths: html
 
+  docs-deploy:
+    docker:
+      - image: cimg/node:16.17 # Replace with your preferred Node version
+    steps:
+      - checkout
+      - attach_workspace:
+          at: docs/_build
+      - run:
+          name: Disable Jekyll for GitHub Pages
+          command: touch docs/_build/html/.nojekyll
+      - run:
+          name: Install gh-pages tool
+          command: npm install -g gh-pages@3.2.3
+      - run:
+          name: Configure Git for deployment
+          command: |
+            git config --global user.email "ci-build@example.com"
+            git config --global user.name "CI Build"
+      - run:
+          name: Deploy documentation to GitHub Pages
+          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist docs/_build/html
+
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - test
       - docs-build
+      - docs-deploy:
+          requires:
+            - test
+            - docs-build
+          filters:
+            branches:
+              only: main
