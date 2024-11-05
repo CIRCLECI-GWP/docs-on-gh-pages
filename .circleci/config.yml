@@ -54,7 +54,7 @@ jobs:
             git config --global user.name "CI Build"
       - run:
           name: Deploy documentation to GitHub Pages
-          command: gh-pages --dotfiles --message "[skip ci] Updates" --dist docs/_build/html
+          command: npx gh-pages --dotfiles --message "[skip ci] Updates" --dist docs/_build/html
 
 workflows:
   version: 2
